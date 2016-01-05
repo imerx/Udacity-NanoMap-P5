@@ -1,0 +1,15 @@
+html{height:100%}
+body{height:100%;margin:0;padding:0}
+h3{text-align:center}
+ul{padding:0;margin:0}
+li{cursor:pointer;cursor:hand;padding-left:0;margin:0}
+li p{text-align:center;padding:2px;margin:0}
+p.name{font-size:14px;font-weight:bold}
+li:hover{background-color:#AEA9B5}
+#map-canvas{height:100%}
+#list{background-color:#fff;font-family:Roboto;font-size:11px;font-weight:300;margin-left:12px;padding:0;overflow:auto;width:25%%;height:75%}
+img #flickr{top:5px;left:5%;z-index:5;position:absolute}
+#images img{width:32%;margin:3px}
+div.modal-container{position:absolute;top:30px;left:20px}
+#page-content-wrapper{width:100%;position:absolute;padding:15px;text-align:15px;left:35px}
+#filter{margin:10px;width:83%;height:35px;font-size:17px;text-align:center;padding-left:10px}
