@@ -71,7 +71,7 @@ function initMap() {
                 animation: google.maps.Animation.DROP,
                 place_id: place.place_id
             });
-            google.maps.event.addListener(marker, 'click', toggleBounce, (function (marker) {
+            google.maps.event.addListener(marker, 'click', (function (marker) {
                 return function () {
                     self.clickMarkerLocation(marker);
                     setTimeout(function () {
@@ -132,15 +132,7 @@ function initMap() {
                         self.foursquareInfo = ('Unable to load foursquare');
                     });
         };
-        // set the animaton marker
-        function toggleBounce() {
-            if (marker.getAnimation() != null) {
-                marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-            }
-        }
-        //  Get the information of all places  and push to myplace
+                //  Get the information of all places  and push to myplace
         function getAllPlaces(place) {
             var myPlace = {};
             myPlace.place_id = place.place_id;
