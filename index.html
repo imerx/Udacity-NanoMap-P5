@@ -8,7 +8,7 @@
       <link href="css/bootstrap.min.css" rel="stylesheet">
    </head>
    <body>
-   <div id="map-canvas" onerror="gmerror()"></div>
+      <div id="map-canvas" onerror="gmerror()"></div>
       <!-- Page Content -->
       <div id="list">
          <h3>Indy  Favorite Places</h3>
@@ -19,34 +19,9 @@
             </li>
          </ul>
       </div>
-      <!---  container modal  -->
-      <div class="modal-container">
-         <!-- Trigger the modal with a  image-->
-         <a  href="#" data-toggle="modal" data-target="#myModal">
-         <img id="flickr" src="img/flickr.png" alt="Flickr Logo">
-         </a>
-         <!-- Modal -->
-         <div id="myModal" class="modal fade" role="gallery">
-            <div class="modal-dialog modal-lg">
-               <!-- Modal content-->
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Gallery Indianapolis</h4>
-                  </div>
-                  <div class="modal-body">
-                             <div id="images"></div>
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!-- close modal content-->
       </div>
-      <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-      <script async type="text/javascript" src="js/flickr.js"></script>
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbzcA8CYfMnUMs6I3l0hn2xFrvqNL2RIg&signed_in=true&libraries=places&callback=initMap" async defer></script>
       <script src="js/lib/knockout-3.2.0.js"></script>
       <script src="js/lib/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
