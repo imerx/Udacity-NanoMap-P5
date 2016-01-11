@@ -9,19 +9,12 @@ function initMap() {
         self.allPlaces = ko.observableArray([]);
         self.filter = ko.observable();
         self.foursquareInfo = '';
-        var lat = '';
-        var lng = '';
-        function mapOptions() {
-            var latAndLng = map.getCenter();
-            var lat = latAndLng.lat();
-            var lng = latAndLng.lng();
-        }
-        // initialize  google map with center options
+                // initialize  google map with center options
         function initialize() {
             map = new google.maps.Map(document.getElementById('map-canvas'), {
                     center: Indianapolis,
                     zoom: 12
-                })
+                });
                 // alert the user when the map are not  loaded
             var timer = window.setTimeout(failedToLoad, 5000);
             google.maps.event.addListener(map, 'tilesloaded', function () {
@@ -32,7 +25,7 @@ function initMap() {
                 alert('google map not loaded');
             }
             getPlaces();
-            mapOptions();
+
             var list = (document.getElementById('list'));
             map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(list);
         }
@@ -85,8 +78,7 @@ function initMap() {
         //  click  element for the nav list  and  point of infowindow.
         self.clickMarkerLocation = function (place) {
             var marker;
-            var selectedMarker = null;
-            for (var e = 0, len = markersArray.length; e < len; e++) {
+               for (var e = 0, len = markersArray.length; e < len; e++) {
                 if (place.place_id === markersArray[e].place_id) {
                     marker = markersArray[e];
                     break;
@@ -112,11 +104,12 @@ function initMap() {
                     return place;
             });
         }, self);
+
         //fouersquare credencial to get request
         var client_id = 'RGMJKQL042AOOBTOXDFEFHZ2HXVFW53TCEMXZYYUWAN3BOQ4';
         var client_secret = '5C4ZIV324IMZPDGCAUFBWARI01YJMRJGOZ2F45FBUOAEIZKC';
         this.getFoursquareInfo = function (selector) {
-            var key = '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + '20140626';
+
             var URL = 'https://api.foursquare.com/v2/venues/search?client_id=' + client_id + '&client_secret=' + client_secret + '&v=20150321' + '&ll=' +
                 39.7799642 + ',' + -86.272836 + '&query=\'' + selector.name + '\'&limit=1';
             // append fsquare formated address to nfoview
@@ -140,7 +133,7 @@ function initMap() {
             myPlace.name = place.name;
             myPlace.address = address;
             self.allPlaces.push(myPlace);
-        }
+        };
         google.maps.event.addDomListener(window, 'load', initialize);
     }
     $(function () {
