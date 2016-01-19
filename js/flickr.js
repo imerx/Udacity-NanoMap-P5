@@ -1,4 +1,4 @@
-
+// this code will be use for future implwmentation with knockout
 $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?", {
     tags: "indy,store",
     tagmode: "all",
