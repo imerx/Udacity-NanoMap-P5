@@ -9,23 +9,15 @@ function initMap() {
         self.allPlaces = ko.observableArray([]);
         self.filter = ko.observable();
         self.foursquareInfo = '';
-                // initialize  google map with center options
+        self.markerFilter = ko.observableArray();
+        // initialize  google map with center options
         function initialize() {
             map = new google.maps.Map(document.getElementById('map-canvas'), {
-                    center: Indianapolis,
-                    zoom: 12
-                });
-                // alert the user when the map are not  loaded
-            var timer = window.setTimeout(failedToLoad, 5000);
-            google.maps.event.addListener(map, 'tilesloaded', function () {
-                window.clearTimeout(timer);
+                center: Indianapolis,
+                zoom: 12
             });
-
-            function failedToLoad() {
-                alert('google map not loaded');
-            }
+            // alert the user when the map are not  loaded
             getPlaces();
-
             var list = (document.getElementById('list'));
             map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(list);
         }
@@ -73,12 +65,13 @@ function initMap() {
                 };
             })(marker));
             markersArray.push(marker);
+            self.markerFilter.push(marker);
             return marker;
         }
         //  click  element for the nav list  and  point of infowindow.
         self.clickMarkerLocation = function (place) {
             var marker;
-               for (var e = 0, len = markersArray.length; e < len; e++) {
+            for (var e = 0, len = markersArray.length; e < len; e++) {
                 if (place.place_id === markersArray[e].place_id) {
                     marker = markersArray[e];
                     break;
@@ -93,23 +86,33 @@ function initMap() {
                 infowindow.open(map, marker);
                 marker.setAnimation(google.maps.Animation.BOUNCE);
                 setTimeout(function () {
-                    marker.setAnimation(null)
+                    marker.setAnimation(null);
                 }, 3000);
             }, 300);
         };
         //filter   the search in the nav list
         self.visiblePlaces = ko.computed(function () {
-            return self.allPlaces().filter(function (place) {
+            return self.markerFilter().filter(function (place) {
                 if (!self.filter() || place.name.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1)
                     return place;
             });
         }, self);
-
+        // filtered marker   will show only  marker  that match the nav search
+        self.visiblePlaces.subscribe(function () {
+            var filter = ko.utils.compareArrays(self.markerFilter(), self.visiblePlaces());
+            ko.utils.arrayForEach(filter, function (marker) {
+                if (marker.status === 'deleted') {
+                    marker.value.setMap(null);
+                    infowindow.close();
+                } else {
+                    marker.value.setMap(map);
+                }
+            });
+        });
         //fouersquare credencial to get request
         var client_id = 'RGMJKQL042AOOBTOXDFEFHZ2HXVFW53TCEMXZYYUWAN3BOQ4';
         var client_secret = '5C4ZIV324IMZPDGCAUFBWARI01YJMRJGOZ2F45FBUOAEIZKC';
         this.getFoursquareInfo = function (selector) {
-
             var URL = 'https://api.foursquare.com/v2/venues/search?client_id=' + client_id + '&client_secret=' + client_secret + '&v=20150321' + '&ll=' +
                 39.7799642 + ',' + -86.272836 + '&query=\'' + selector.name + '\'&limit=1';
             // append fsquare formated address to nfoview
@@ -119,13 +122,13 @@ function initMap() {
                     var venueName = venue.name;
                     var faddress = venue.location.formattedAddress;
                     self.foursquareInfo = '<p>Foursquare  address:</p>' + venueName + '<br>' + faddress;
-                    infowindow.setContent()
+                    infowindow.setContent();
                 }).error(function (e) // error handler
                     {
                         self.foursquareInfo = ('Unable to load foursquare');
                     });
         };
-                //  Get the information of all places  and push to myplace
+        //  Get the information of all places  and push to myplace
         function getAllPlaces(place) {
             var myPlace = {};
             myPlace.place_id = place.place_id;
@@ -133,10 +136,14 @@ function initMap() {
             myPlace.name = place.name;
             myPlace.address = address;
             self.allPlaces.push(myPlace);
-        };
+        }
         google.maps.event.addDomListener(window, 'load', initialize);
     }
     $(function () {
         ko.applyBindings(new appViewModel());
     });
+}
+
+function gmerror() {
+    alert('google map not loaded');
 }

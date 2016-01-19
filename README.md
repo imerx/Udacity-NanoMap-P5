@@ -18,3 +18,4 @@ Download  or clone files, open ,unzip index.html in a browser
 - [http://stackoverflow.com/questions/8417270/how-to-conditionally-push-an-item-in-an-observable-array](http://stackoverflow.com/questions/8417270/how-to-conditionally-push-an-item-in-an-observable-array)
 - [https://www.airpair.com/knockout/posts/top-10-mistakes-knockoutjs](https://www.airpair.com/knockout/posts/top-10-mistakes-knockoutjs)
 - [https://www.devbridge.com/articles/knockout-a-real-world-example/](https://www.devbridge.com/articles/knockout-a-real-world-example/)
+- [http://stackoverflow.com/questions/29557938/removing-map-pin-with-search](http://stackoverflow.com/questions/29557938/removing-map-pin-with-search)

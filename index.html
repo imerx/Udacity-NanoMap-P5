@@ -4,24 +4,22 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title> Udacity Neighborhood Map</title>
-      <link href="css/style.css" rel="stylesheet" type="text/css">
+      <link href="css/style.css" rel="stylesheet" >
       <link href="css/bootstrap.min.css" rel="stylesheet">
    </head>
    <body>
-      <div id="map-canvas" onerror="gmerror()"></div>
+      <div id="map-canvas" ></div>
       <!-- Page Content -->
       <div id="list">
          <h3>Indy  Favorite Places</h3>
          <input id="filter" placeholder="Filter Locations"  type="text" data-bind="textInput: filter"/>
          <ul data-bind="foreach: visiblePlaces">
             <li data-bind="click: $parent.clickMarkerLocation">
-               <p class="name"><span data-bind="text: name"><span></p>
+               <p class="name"><span data-bind="text: name"></span></p>
             </li>
          </ul>
       </div>
-      </div>
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbzcA8CYfMnUMs6I3l0hn2xFrvqNL2RIg&libraries=places&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbzcA8CYfMnUMs6I3l0hn2xFrvqNL2RIg&libraries=places&callback=initMap" async defer onerror="gmerror()" ></script>
       <script src="js/lib/knockout-3.2.0.js"></script>
       <script src="js/lib/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
